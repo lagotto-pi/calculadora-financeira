@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira | lagotto</title>
+    <style>
+      
+        *{font-family:Verdana, Geneva, Tahoma, sans-serif; 
+            color: whitesmoke;
+        }
+
+        input{
+            border-radius: 10px; 
+            outline: none; 
+            padding: 4px; 
+            font-size: 16px ;
+            color: black
+        }
+
+        button{
+            outline: none;
+            padding: 4px;
+            font-size: 16px;
+            color: black;
+        }
+
+        div{
+            font-size: 16px;
+        }
+        
+
+    </style>
+</head>
+<body style="background-color: #503324;">
+
+    <center>
+<h1> 
+    <img width="200px" src = 'lagottobranco.png'>
+</h1>
+        
+            <h2>
+                Orçamento do produto
+            </h2>
+        
+            <h3>
+                Insira as informações:
+            </h3>
+               
+            Quantidade de árvores:
+            
+            <p>
+                <input type="number" id="ipt_arv">
+            </p>
+
+            Quantos hectares:
+
+            <p>
+                <input type="number" id="ipt_hectare">
+            </p>
+
+        <button onclick="calculo()">Calcular Orçamento</button>
+
+        <p>
+            <div id="div_exibirMsg"></div>
+        </p>
+    </body>
+    </center>
+    
+</html>
+<script>
+    function calculo(){
+
+        var arvore = Number(ipt_arv.value)
+        var hectare = Number(ipt_hectare.value)
+        var sensor = 8 * arvore
+        var arduino = (arvore / 6) * 52.90  
+        var instalacao = arvore * 12.5
+        var sistema = 1350
+        var valorGeral = sensor + arduino + instalacao + sistema
+         var desconto = arvore >=1000 ? valorGeral * 0.10: 0    
+         var valorTotal = valorGeral - desconto
+         var kgporano = arvore * 0.006
+         var kg12anos = arvore *0.55
+         var avisomax = 800
+         var avisomin = 300
+         var precotrufa = 12000 * kgporano
+         var roiAno =((precotrufa - valorTotal) / valorTotal) *100
+         var Lucro = precotrufa - valorTotal
+
+         div_exibirMsg.innerHTML = `Com ${arvore} árvores e ${hectare} hectares você terá um gasto de:
+         <br> Sensores (1:1): R$${sensor.toFixed(2)}
+         <br> Arduínos (1:6): R$${arduino.toFixed(2)}
+         <br> Instalação: R$${instalacao.toFixed(2)}
+         <br> Sistema: R$${sistema.toFixed(2)}
+         <br> Total: R$${valorTotal.toFixed(2)}
+         <br> Você produzirá ${kgporano}kg/ano de trufas negras
+         <br> Com ${kgporano}kg/ano você terá o preço de venda de R$${precotrufa}
+         <br> Lucro: R$${Lucro}
+         <br> ROI (Retorno no investimento): ${roiAno.toFixed(2)}%
+         <br> A partir do 12° ano a sua produção de trufas negras irá aumentar em até ${kg12anos}kg/ano `
+         
+
+
+         if(avisomin * hectare > arvore){div_exibirMsg.innerHTML += `<p style = 'color: red'>Poucas árvores por hectare! O recomendado é de: ${avisomin *hectare} até ${avisomax * hectare}`}
+            if (avisomax * hectare < arvore){div_exibirMsg.innerHTML += `<p style = 'color: red'>Muitas árvores por hectare! O recomendado é de: ${avisomin * hectare} até ${avisomax * hectare}`}
+         
+         
+         
+
+    }
+</script>
