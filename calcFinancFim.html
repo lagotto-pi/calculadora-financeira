@@ -4,97 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora financeira | lagotto</title>
-    <style>
-    
-        
-        /* 
-        font-family muda a fonte das letras
-        color muda a cor da fonte
-        com o prefixo * altera a pag inteira
-
-        */
-        *{font-family:Verdana, Geneva, Tahoma, sans-serif; 
-            color: whitesmoke;
-        }
-
-
-        /*
-        prefixo input (muda o estilo do input)
-        border-radius altera arredondamento da borda
-        outline com o valor none, quando uma caixa é selecionada ela não fica com bordas
-        padding altera o espaçamento de itens dentro de um caixa
-        font-size altera o tamanho da fonte
-        color altera a cor da fonte
-        */
-        input{
-            border-radius: 10px; 
-            outline: none; 
-            padding: 4px; 
-            font-size: 16px ;
-            color: black
-        }
-
-        /*
-        prefixo button (muda o estilo do botão)
-        border-radius altera arredondamento da borda
-        outline com o valor none, quando uma caixa é selecionada ela não fica com bordas
-        padding altera o espaçamento de itens dentro de um caixa
-        font-size altera o tamanho da fonte
-        color altera a cor da fonte
-        */
-        button{
-            outline: none;
-            padding: 4px;
-            font-size: 16px;
-            color: black;
-        }
-
-        
-        /*
-        prefixo div (muda o estilo dos itens da div)
-        font-size altera o tamanho da fonte
-        */
-        div{
-            font-size: 16px;
-        }
-        
-
-    </style>
 </head>
-<body style="background-color: #503324;">
+<body>
 
     <center>
-<h1> 
-    <img width="200px" src = 'lagottobranco.png'>
-</h1>
-        
-            <h2>
-                Orçamento do produto
-            </h2>
-        
-            <h3>
-                Insira as informações:
-            </h3>
-
-            Quantidade de árvores:
+        <h1> 
+            <img width="200px" src = 'lagottomarrom.png'>
+        </h1>
+    
+        <h2>
+            Orçamento do produto
+        </h2>
+    
+        <h3>
+            Insira as informações:
+        </h3>
             
-            <p>
-                <input type="number" id="ipt_arv">
-            </p>
+        Quantidade de árvores:
+        
+        <p>
+            <input type="number" id="ipt_arv">
+        </p>
 
-            Quantos hectares:
+        Quantos hectares:
 
-            <p>
-                <input type="number" id="ipt_hectare">
-            </p>
+        <p>
+            <input type="number" id="ipt_hectare">
+        </p>
 
         <button onclick="calculo()">Calcular Orçamento</button>
 
         <p>
             <div id="div_exibirMsg"></div>
         </p>
-    </body>
     </center>
+</body>
     
 </html>
 <script>
@@ -103,8 +47,8 @@
         var arvore = Number(ipt_arv.value)
         var hectare = Number(ipt_hectare.value)
         var sensor = 8 * arvore
-        var arduino = (arvore / 6) * 52.90  
-        var instalacao = arvore * 12.5
+        var arduino = (arvore / 6) * 42.9  
+        var instalacao = arvore * 8.50
         var sistema = 1350
         var valorGeral = sensor + arduino + instalacao + sistema
         var desconto = arvore >=1000 ? valorGeral * 0.10: 0    
@@ -123,16 +67,20 @@
         <br> Instalação: R$${instalacao.toFixed(2)}
         <br> Sistema: R$${sistema.toFixed(2)}
         <br> Total: R$${valorTotal.toFixed(2)}
-        <br> Você produzirá ${kgporano}kg/ano de trufas negras
-        <br> Com ${kgporano}kg/ano você terá o preço de venda de R$${precotrufa}
-        <br> Lucro: R$${Lucro}
+        <br> Você produzirá ${kgporano.toFixed(2)}kg/ano de trufas negras
+        <br> Com ${kgporano.toFixed(2)}kg/ano você terá o preço de venda de R$${precotrufa.toFixed(2)}
+        <br> Lucro: R$${Lucro.toFixed(2)}
         <br> ROI (Retorno no investimento): ${roiAno.toFixed(2)}%
-        <br> A partir do 12° ano a sua produção de trufas negras irá aumentar em até ${kg12anos}kg/ano `
+        <br> A partir do 12° ano a sua produção de trufas negras irá aumentar em até ${kg12anos.toFixed(2)}kg/ano
+        <br> A partir do 12° ano a sua produção irá ter um retorno de R$${(kg12anos*12000).toFixed(2)}/ano`
         
 
 
-         if(avisomin * hectare > arvore){div_exibirMsg.innerHTML += `<p style = 'color: red'>Poucas árvores por hectare! O recomendado é de: ${avisomin *hectare} até ${avisomax * hectare}`}
-            if (avisomax * hectare < arvore){div_exibirMsg.innerHTML += `<p style = 'color: red'>Muitas árvores por hectare! O recomendado é de: ${avisomin * hectare} até ${avisomax * hectare}`}
+        if(avisomin * hectare > arvore){div_exibirMsg.innerHTML += `<p>Poucas árvores por hectare! O recomendado é de: ${avisomin *hectare} até ${avisomax * hectare}`}
+        if (avisomax * hectare < arvore){div_exibirMsg.innerHTML += `<p>Muitas árvores por hectare! O recomendado é de: ${avisomin * hectare} até ${avisomax * hectare}`}
+         
+         
+         
 
     }
 </script>
